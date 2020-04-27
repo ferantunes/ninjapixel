@@ -1,19 +1,13 @@
 *** Settings ***
-Documentation       Login
+Documentation    Login
 ...     Sendo um administrador de catálogo
 ...     Quero me autenticar no sistema
 ...     Para que eu possa gerenciar o catálogo de produtos
 
-Library     SeleniumLibrary
+Resource    ../resources/actions.robot
+Resource    ../resources/pages/BasePage.robot
 
-Test Teardown      Fecha navegador
-
-*** Variables ***
-${EMAIL}                        fernanda@ninjapixel.com
-${CAMPO_EMAIL}                  id:emailId
-${CAMPO_SENHA}                  id:passId
-${BTN_ENTRAR}                   class:btn
-${MSG_USR_SENHA_INVALIDO}       css:.alert-dismissible
+Test Teardown    Close session
 
 *** Test Cases ***
 Login com sucesso
@@ -22,30 +16,25 @@ Login com sucesso
     Entao devo ser autenticado
 
 Senha incorreta
-    Dado que eu acesso a página de login
-    Quando eu submeto minhas credenciais com senha incorreta
-    Entao devo ver uma mensagem de alerta "Usuário e/ou senha inválidos"
+    [Template]    Tentativa de login
+    fernanda@ninjapixel.com     abc     Usuário e/ou senha inválidos
+
+E-mail não existe
+    [Template]    Tentativa de login
+    404@ig.com     pwd123     Usuário e/ou senha inválidos
+
+E-mail obrigatório
+    [Template]    Tentativa de login
+    ${EMPTY}     pwd123     Opps. Informe o seu email!
+
+Senha obrigatória
+    [Template]    Tentativa de login
+    fernanda@ninjapixel.com     ${EMPTY}     Opps. Informe a sua senha!
 
 *** Keywords ***
-Dado que eu acesso a página de login
-    Open Browser    http://pixel-web:3000/login     chrome
+Tentativa de login
+    [Arguments]     ${email}    ${pass}    ${mensagem_alerta}
 
-Quando eu submeto minhas credenciais "${email}" e "${pass}"
-    Input Text      ${CAMPO_EMAIL}      ${email}
-    Input Text      ${CAMPO_SENHA}      ${pass}
-    Click Element   ${BTN_ENTRAR}
-
-Entao devo ser autenticado
-    Wait Until Page Contains    Papito
-
-Quando eu submeto minhas credenciais com senha incorreta
-    Input Text      ${CAMPO_EMAIL}      ${EMAIL}
-    Input Text      ${CAMPO_SENHA}      abc
-    Click Element   ${BTN_ENTRAR}
-
-Entao devo ver uma mensagem de alerta "${mensagem_alerta}"
-    Wait Until Element Is Visible       ${MSG_USR_SENHA_INVALIDO}
-    Element Text Should Be              ${MSG_USR_SENHA_INVALIDO}       ${mensagem_alerta}
-
-Fecha navegador
-    Close Browser
+    Dado que eu acesso a página de login
+    Quando eu submeto minhas credenciais "${email}" e "${pass}"
+    Entao devo ver uma mensagem de alerta "${mensagem_alerta}"

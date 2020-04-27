@@ -1,152 +1,640 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.2 (Python 3.8.2 on win32)" generated="20200421 20:52:58.635" rpa="false">
-<suite id="s1" name="Login" source="C:\qaninja\ninjapixel\tests\login.robot">
-<test id="s1-t1" name="Login com sucesso">
-<kw name="Dado que eu acesso a página de login">
+<robot generator="Robot 3.1.2 (Python 3.8.2 on win32)" generated="20200426 22:54:02.498" rpa="false">
+<suite id="s1" name="Cadastro &amp; Login">
+<suite id="s1-s1" name="Cadastro" source="C:\qaninja\ninjapixel\tests\cadastro.robot">
+<test id="s1-s1-t1" name="Disponibilizar produto">
+<kw name="Open session" library="BasePage" type="setup">
 <kw name="Open Browser" library="SeleniumLibrary">
 <doc>Opens a new browser instance to the optional ``url``.</doc>
 <arguments>
-<arg>http://pixel-web:3000/login</arg>
+<arg>http://pixel-web:3000</arg>
 <arg>chrome</arg>
 </arguments>
-<msg timestamp="20200421 20:52:58.940" level="INFO">Opening browser 'chrome' to base url 'http://pixel-web:3000/login'.</msg>
-<status status="PASS" starttime="20200421 20:52:58.940" endtime="20200421 20:53:10.891"></status>
+<msg timestamp="20200426 22:54:02.842" level="INFO">Opening browser 'chrome' to base url 'http://pixel-web:3000'.</msg>
+<status status="PASS" starttime="20200426 22:54:02.842" endtime="20200426 22:54:10.231"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:52:58.939" endtime="20200421 20:53:10.891"></status>
+<kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:54:10.231" endtime="20200426 22:54:10.233"></status>
 </kw>
-<kw name="Quando eu submeto minhas credenciais &quot;fernanda@ninjapixel.com&quot; e &quot;pwd123&quot;">
+<status status="PASS" starttime="20200426 22:54:02.841" endtime="20200426 22:54:10.233"></status>
+</kw>
+<kw name="Dado que estou logado">
+<kw name="Login with" library="LoginPage">
+<arguments>
+<arg>fernanda@ninjapixel.com</arg>
+<arg>pwd123</arg>
+</arguments>
 <kw name="Input Text" library="SeleniumLibrary">
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
 <arguments>
-<arg>${CAMPO_EMAIL}</arg>
+<arg>id:emailId</arg>
 <arg>${email}</arg>
 </arguments>
-<msg timestamp="20200421 20:53:10.893" level="INFO">Typing text 'fernanda@ninjapixel.com' into text field 'id:emailId'.</msg>
-<status status="PASS" starttime="20200421 20:53:10.892" endtime="20200421 20:53:11.138"></status>
+<msg timestamp="20200426 22:54:10.235" level="INFO">Typing text 'fernanda@ninjapixel.com' into text field 'id:emailId'.</msg>
+<status status="PASS" starttime="20200426 22:54:10.235" endtime="20200426 22:54:11.113"></status>
 </kw>
 <kw name="Input Text" library="SeleniumLibrary">
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
 <arguments>
-<arg>${CAMPO_SENHA}</arg>
+<arg>id:passId</arg>
 <arg>${pass}</arg>
 </arguments>
-<msg timestamp="20200421 20:53:11.138" level="INFO">Typing text 'pwd123' into text field 'id:passId'.</msg>
-<status status="PASS" starttime="20200421 20:53:11.138" endtime="20200421 20:53:11.258"></status>
+<msg timestamp="20200426 22:54:11.113" level="INFO">Typing text 'pwd123' into text field 'id:passId'.</msg>
+<status status="PASS" starttime="20200426 22:54:11.113" endtime="20200426 22:54:11.319"></status>
 </kw>
 <kw name="Click Element" library="SeleniumLibrary">
 <doc>Click the element identified by ``locator``.</doc>
 <arguments>
-<arg>${BTN_ENTRAR}</arg>
+<arg>class:btn</arg>
 </arguments>
-<msg timestamp="20200421 20:53:11.259" level="INFO">Clicking element 'class:btn'.</msg>
-<status status="PASS" starttime="20200421 20:53:11.258" endtime="20200421 20:53:11.329"></status>
+<msg timestamp="20200426 22:54:11.319" level="INFO">Clicking element 'class:btn'.</msg>
+<status status="PASS" starttime="20200426 22:54:11.319" endtime="20200426 22:54:11.413"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:53:10.892" endtime="20200421 20:53:11.329"></status>
+<status status="PASS" starttime="20200426 22:54:10.235" endtime="20200426 22:54:11.413"></status>
 </kw>
-<kw name="Entao devo ser autenticado">
+<status status="PASS" starttime="20200426 22:54:10.234" endtime="20200426 22:54:11.413"></status>
+</kw>
+<kw name="Quando eu faço o cadastro desse produto">
+<arguments>
+<arg>dk.json</arg>
+</arguments>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>fixtures/${json_file}</arg>
+</arguments>
+<assign>
+<var>${product_file}</var>
+</assign>
+<msg timestamp="20200426 22:54:11.417" level="INFO" html="yes">Getting file '&lt;a href="file://C:\qaninja\ninjapixel\tests\fixtures\dk.json"&gt;C:\qaninja\ninjapixel\tests\fixtures\dk.json&lt;/a&gt;'.</msg>
+<msg timestamp="20200426 22:54:11.440" level="INFO">${product_file} = {
+    "name": "Donkey Kong",
+    "cat": "Super Nintendo",
+    "price": "49.99",
+    "desc": "Um jogo muito divertido!"
+}</msg>
+<status status="PASS" starttime="20200426 22:54:11.416" endtime="20200426 22:54:11.440"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.loads($product_file)</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${product_json}</var>
+</assign>
+<msg timestamp="20200426 22:54:11.447" level="INFO">${product_json} = {'name': 'Donkey Kong', 'cat': 'Super Nintendo', 'price': '49.99', 'desc': 'Um jogo muito divertido!'}</msg>
+<status status="PASS" starttime="20200426 22:54:11.440" endtime="20200426 22:54:11.448"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>class:product-add</arg>
+</arguments>
+<msg timestamp="20200426 22:54:11.448" level="INFO">Clicking element 'class:product-add'.</msg>
+<status status="PASS" starttime="20200426 22:54:11.448" endtime="20200426 22:54:12.185"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>css:input[name=title]</arg>
+<arg>${product_json['name']}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:12.186" level="INFO">Typing text 'Donkey Kong' into text field 'css:input[name=title]'.</msg>
+<status status="PASS" starttime="20200426 22:54:12.186" endtime="20200426 22:54:12.884"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>css:input[placeholder=Gategoria]</arg>
+</arguments>
+<msg timestamp="20200426 22:54:12.884" level="INFO">Clicking element 'css:input[placeholder=Gategoria]'.</msg>
+<status status="PASS" starttime="20200426 22:54:12.884" endtime="20200426 22:54:12.990"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>xpath://li/span[text()='${product_json['cat']}']</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:54:12.991" endtime="20200426 22:54:13.272"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://li/span[text()='${product_json['cat']}']</arg>
+</arguments>
+<msg timestamp="20200426 22:54:13.272" level="INFO">Clicking element 'xpath://li/span[text()='Super Nintendo']'.</msg>
+<status status="PASS" starttime="20200426 22:54:13.272" endtime="20200426 22:54:13.349"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>css:input[name=price]</arg>
+<arg>${product_json['price']}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:13.350" level="INFO">Typing text '49.99' into text field 'css:input[name=price]'.</msg>
+<status status="PASS" starttime="20200426 22:54:13.349" endtime="20200426 22:54:13.499"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:11.416" endtime="20200426 22:54:13.499"></status>
+</kw>
+<kw name="Close session" library="BasePage" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200426 22:54:13.502" endtime="20200426 22:54:15.905"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:13.502" endtime="20200426 22:54:15.905"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:02.841" endtime="20200426 22:54:15.906" critical="yes"></status>
+</test>
+<doc>Cadastro de produtos
+Sendo um administrador de catálogo
+Quero cadastrar produtos
+Para que eu possa disponibilizar-los na loja virtual</doc>
+<status status="PASS" starttime="20200426 22:54:02.533" endtime="20200426 22:54:15.908"></status>
+</suite>
+<suite id="s1-s2" name="Login" source="C:\qaninja\ninjapixel\tests\login.robot">
+<test id="s1-s2-t1" name="Login com sucesso">
+<kw name="Dado que eu acesso a página de login" library="actions">
+<kw name="Open session" library="BasePage">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>http://pixel-web:3000</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200426 22:54:15.922" level="INFO">Opening browser 'chrome' to base url 'http://pixel-web:3000'.</msg>
+<status status="PASS" starttime="20200426 22:54:15.921" endtime="20200426 22:54:22.943"></status>
+</kw>
+<kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:54:22.943" endtime="20200426 22:54:22.946"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:15.921" endtime="20200426 22:54:22.946"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:15.921" endtime="20200426 22:54:22.946"></status>
+</kw>
+<kw name="Quando eu submeto minhas credenciais &quot;fernanda@ninjapixel.com&quot; e &quot;pwd123&quot;" library="actions">
+<kw name="Login with" library="LoginPage">
+<arguments>
+<arg>${email}</arg>
+<arg>${pass}</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:22.951" level="INFO">Typing text 'fernanda@ninjapixel.com' into text field 'id:emailId'.</msg>
+<status status="PASS" starttime="20200426 22:54:22.951" endtime="20200426 22:54:23.716"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:23.716" level="INFO">Typing text 'pwd123' into text field 'id:passId'.</msg>
+<status status="PASS" starttime="20200426 22:54:23.716" endtime="20200426 22:54:23.835"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>class:btn</arg>
+</arguments>
+<msg timestamp="20200426 22:54:23.836" level="INFO">Clicking element 'class:btn'.</msg>
+<status status="PASS" starttime="20200426 22:54:23.835" endtime="20200426 22:54:23.906"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:22.950" endtime="20200426 22:54:23.906"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:22.950" endtime="20200426 22:54:23.906"></status>
+</kw>
+<kw name="Entao devo ser autenticado" library="actions">
 <kw name="Wait Until Page Contains" library="SeleniumLibrary">
 <doc>Waits until ``text`` appears on the current page.</doc>
 <arguments>
 <arg>Papito</arg>
 </arguments>
-<status status="PASS" starttime="20200421 20:53:11.330" endtime="20200421 20:53:11.367"></status>
+<status status="PASS" starttime="20200426 22:54:23.907" endtime="20200426 22:54:23.942"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:53:11.330" endtime="20200421 20:53:11.367"></status>
+<status status="PASS" starttime="20200426 22:54:23.907" endtime="20200426 22:54:23.943"></status>
 </kw>
-<kw name="Fecha navegador" type="teardown">
+<kw name="Close session" library="BasePage" type="teardown">
 <kw name="Close Browser" library="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20200421 20:53:11.368" endtime="20200421 20:53:13.712"></status>
+<status status="PASS" starttime="20200426 22:54:23.944" endtime="20200426 22:54:26.186"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:53:11.368" endtime="20200421 20:53:13.712"></status>
+<status status="PASS" starttime="20200426 22:54:23.943" endtime="20200426 22:54:26.186"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:52:58.938" endtime="20200421 20:53:13.713" critical="yes"></status>
+<status status="PASS" starttime="20200426 22:54:15.920" endtime="20200426 22:54:26.187" critical="yes"></status>
 </test>
-<test id="s1-t2" name="Senha incorreta">
-<kw name="Dado que eu acesso a página de login">
+<test id="s1-s2-t2" name="Senha incorreta">
+<kw name="Tentativa de login">
+<arguments>
+<arg>fernanda@ninjapixel.com</arg>
+<arg>abc</arg>
+<arg>Usuário e/ou senha inválidos</arg>
+</arguments>
+<kw name="Dado que eu acesso a página de login" library="actions">
+<kw name="Open session" library="BasePage">
 <kw name="Open Browser" library="SeleniumLibrary">
 <doc>Opens a new browser instance to the optional ``url``.</doc>
 <arguments>
-<arg>http://pixel-web:3000/login</arg>
+<arg>http://pixel-web:3000</arg>
 <arg>chrome</arg>
 </arguments>
-<msg timestamp="20200421 20:53:13.717" level="INFO">Opening browser 'chrome' to base url 'http://pixel-web:3000/login'.</msg>
-<status status="PASS" starttime="20200421 20:53:13.716" endtime="20200421 20:53:21.934"></status>
+<msg timestamp="20200426 22:54:26.191" level="INFO">Opening browser 'chrome' to base url 'http://pixel-web:3000'.</msg>
+<status status="PASS" starttime="20200426 22:54:26.191" endtime="20200426 22:54:32.596"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:53:13.716" endtime="20200421 20:53:21.934"></status>
+<kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:54:32.596" endtime="20200426 22:54:32.598"></status>
 </kw>
-<kw name="Quando eu submeto minhas credenciais com senha incorreta">
+<status status="PASS" starttime="20200426 22:54:26.190" endtime="20200426 22:54:32.599"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:26.190" endtime="20200426 22:54:32.599"></status>
+</kw>
+<kw name="Quando eu submeto minhas credenciais &quot;${email}&quot; e &quot;${pass}&quot;" library="actions">
+<kw name="Login with" library="LoginPage">
+<arguments>
+<arg>${email}</arg>
+<arg>${pass}</arg>
+</arguments>
 <kw name="Input Text" library="SeleniumLibrary">
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
 <arguments>
-<arg>${CAMPO_EMAIL}</arg>
-<arg>${EMAIL}</arg>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
 </arguments>
-<msg timestamp="20200421 20:53:21.937" level="INFO">Typing text 'fernanda@ninjapixel.com' into text field 'id:emailId'.</msg>
-<status status="PASS" starttime="20200421 20:53:21.936" endtime="20200421 20:53:22.181"></status>
+<msg timestamp="20200426 22:54:32.600" level="INFO">Typing text 'fernanda@ninjapixel.com' into text field 'id:emailId'.</msg>
+<status status="PASS" starttime="20200426 22:54:32.600" endtime="20200426 22:54:33.461"></status>
 </kw>
 <kw name="Input Text" library="SeleniumLibrary">
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
 <arguments>
-<arg>${CAMPO_SENHA}</arg>
-<arg>abc</arg>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
 </arguments>
-<msg timestamp="20200421 20:53:22.181" level="INFO">Typing text 'abc' into text field 'id:passId'.</msg>
-<status status="PASS" starttime="20200421 20:53:22.181" endtime="20200421 20:53:22.285"></status>
+<msg timestamp="20200426 22:54:33.462" level="INFO">Typing text 'abc' into text field 'id:passId'.</msg>
+<status status="PASS" starttime="20200426 22:54:33.461" endtime="20200426 22:54:33.560"></status>
 </kw>
 <kw name="Click Element" library="SeleniumLibrary">
 <doc>Click the element identified by ``locator``.</doc>
 <arguments>
-<arg>${BTN_ENTRAR}</arg>
+<arg>class:btn</arg>
 </arguments>
-<msg timestamp="20200421 20:53:22.285" level="INFO">Clicking element 'class:btn'.</msg>
-<status status="PASS" starttime="20200421 20:53:22.285" endtime="20200421 20:53:22.358"></status>
+<msg timestamp="20200426 22:54:33.560" level="INFO">Clicking element 'class:btn'.</msg>
+<status status="PASS" starttime="20200426 22:54:33.560" endtime="20200426 22:54:33.631"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:53:21.935" endtime="20200421 20:53:22.359"></status>
+<status status="PASS" starttime="20200426 22:54:32.599" endtime="20200426 22:54:33.631"></status>
 </kw>
-<kw name="Entao devo ver uma mensagem de alerta &quot;Usuário e/ou senha inválidos&quot;">
+<status status="PASS" starttime="20200426 22:54:32.599" endtime="20200426 22:54:33.631"></status>
+</kw>
+<kw name="Entao devo ver uma mensagem de alerta &quot;${mensagem_alerta}&quot;" library="actions">
 <kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
 <doc>Waits until the element ``locator`` is visible.</doc>
 <arguments>
-<arg>${MSG_USR_SENHA_INVALIDO}</arg>
+<arg>css:.alert-dismissible</arg>
 </arguments>
-<status status="PASS" starttime="20200421 20:53:22.362" endtime="20200421 20:53:22.638"></status>
+<status status="PASS" starttime="20200426 22:54:33.632" endtime="20200426 22:54:33.888"></status>
 </kw>
 <kw name="Element Text Should Be" library="SeleniumLibrary">
 <doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
 <arguments>
-<arg>${MSG_USR_SENHA_INVALIDO}</arg>
+<arg>css:.alert-dismissible</arg>
 <arg>${mensagem_alerta}</arg>
 </arguments>
-<msg timestamp="20200421 20:53:22.639" level="INFO">Verifying element 'css:.alert-dismissible' contains exact text 'Usuário e/ou senha inválidos'.</msg>
-<status status="PASS" starttime="20200421 20:53:22.638" endtime="20200421 20:53:22.675"></status>
+<msg timestamp="20200426 22:54:33.888" level="INFO">Verifying element 'css:.alert-dismissible' contains exact text 'Usuário e/ou senha inválidos'.</msg>
+<status status="PASS" starttime="20200426 22:54:33.888" endtime="20200426 22:54:33.916"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:53:22.362" endtime="20200421 20:53:22.675"></status>
+<status status="PASS" starttime="20200426 22:54:33.632" endtime="20200426 22:54:33.916"></status>
 </kw>
-<kw name="Fecha navegador" type="teardown">
+<status status="PASS" starttime="20200426 22:54:26.190" endtime="20200426 22:54:33.917"></status>
+</kw>
+<kw name="Close session" library="BasePage" type="teardown">
 <kw name="Close Browser" library="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20200421 20:53:22.677" endtime="20200421 20:53:24.845"></status>
+<status status="PASS" starttime="20200426 22:54:33.918" endtime="20200426 22:54:36.110"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:53:22.676" endtime="20200421 20:53:24.846"></status>
+<status status="PASS" starttime="20200426 22:54:33.917" endtime="20200426 22:54:36.110"></status>
 </kw>
-<status status="PASS" starttime="20200421 20:53:13.715" endtime="20200421 20:53:24.847" critical="yes"></status>
+<status status="PASS" starttime="20200426 22:54:26.189" endtime="20200426 22:54:36.111" critical="yes"></status>
+</test>
+<test id="s1-s2-t3" name="E-mail não existe">
+<kw name="Tentativa de login">
+<arguments>
+<arg>404@ig.com</arg>
+<arg>pwd123</arg>
+<arg>Usuário e/ou senha inválidos</arg>
+</arguments>
+<kw name="Dado que eu acesso a página de login" library="actions">
+<kw name="Open session" library="BasePage">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>http://pixel-web:3000</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200426 22:54:36.119" level="INFO">Opening browser 'chrome' to base url 'http://pixel-web:3000'.</msg>
+<status status="PASS" starttime="20200426 22:54:36.118" endtime="20200426 22:54:42.850"></status>
+</kw>
+<kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:54:42.850" endtime="20200426 22:54:42.868"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:36.118" endtime="20200426 22:54:42.868"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:36.117" endtime="20200426 22:54:42.868"></status>
+</kw>
+<kw name="Quando eu submeto minhas credenciais &quot;${email}&quot; e &quot;${pass}&quot;" library="actions">
+<kw name="Login with" library="LoginPage">
+<arguments>
+<arg>${email}</arg>
+<arg>${pass}</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:42.869" level="INFO">Typing text '404@ig.com' into text field 'id:emailId'.</msg>
+<status status="PASS" starttime="20200426 22:54:42.869" endtime="20200426 22:54:43.382"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:43.383" level="INFO">Typing text 'pwd123' into text field 'id:passId'.</msg>
+<status status="PASS" starttime="20200426 22:54:43.383" endtime="20200426 22:54:43.498"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>class:btn</arg>
+</arguments>
+<msg timestamp="20200426 22:54:43.499" level="INFO">Clicking element 'class:btn'.</msg>
+<status status="PASS" starttime="20200426 22:54:43.498" endtime="20200426 22:54:43.576"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:42.868" endtime="20200426 22:54:43.576"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:42.868" endtime="20200426 22:54:43.577"></status>
+</kw>
+<kw name="Entao devo ver uma mensagem de alerta &quot;${mensagem_alerta}&quot;" library="actions">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>css:.alert-dismissible</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:54:43.577" endtime="20200426 22:54:43.619"></status>
+</kw>
+<kw name="Element Text Should Be" library="SeleniumLibrary">
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<arguments>
+<arg>css:.alert-dismissible</arg>
+<arg>${mensagem_alerta}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:43.619" level="INFO">Verifying element 'css:.alert-dismissible' contains exact text 'Usuário e/ou senha inválidos'.</msg>
+<status status="PASS" starttime="20200426 22:54:43.619" endtime="20200426 22:54:43.648"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:43.577" endtime="20200426 22:54:43.648"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:36.116" endtime="20200426 22:54:43.648"></status>
+</kw>
+<kw name="Close session" library="BasePage" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200426 22:54:43.649" endtime="20200426 22:54:45.844"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:43.649" endtime="20200426 22:54:45.845"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:36.115" endtime="20200426 22:54:45.846" critical="yes"></status>
+</test>
+<test id="s1-s2-t4" name="E-mail obrigatório">
+<kw name="Tentativa de login">
+<arguments>
+<arg>${EMPTY}</arg>
+<arg>pwd123</arg>
+<arg>Opps. Informe o seu email!</arg>
+</arguments>
+<kw name="Dado que eu acesso a página de login" library="actions">
+<kw name="Open session" library="BasePage">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>http://pixel-web:3000</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200426 22:54:45.853" level="INFO">Opening browser 'chrome' to base url 'http://pixel-web:3000'.</msg>
+<status status="PASS" starttime="20200426 22:54:45.853" endtime="20200426 22:54:52.334"></status>
+</kw>
+<kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:54:52.334" endtime="20200426 22:54:52.337"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:45.852" endtime="20200426 22:54:52.337"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:45.852" endtime="20200426 22:54:52.337"></status>
+</kw>
+<kw name="Quando eu submeto minhas credenciais &quot;${email}&quot; e &quot;${pass}&quot;" library="actions">
+<kw name="Login with" library="LoginPage">
+<arguments>
+<arg>${email}</arg>
+<arg>${pass}</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:52.338" level="INFO">Typing text '' into text field 'id:emailId'.</msg>
+<status status="PASS" starttime="20200426 22:54:52.338" endtime="20200426 22:54:52.674"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:52.675" level="INFO">Typing text 'pwd123' into text field 'id:passId'.</msg>
+<status status="PASS" starttime="20200426 22:54:52.674" endtime="20200426 22:54:53.092"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>class:btn</arg>
+</arguments>
+<msg timestamp="20200426 22:54:53.093" level="INFO">Clicking element 'class:btn'.</msg>
+<status status="PASS" starttime="20200426 22:54:53.093" endtime="20200426 22:54:53.168"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:52.338" endtime="20200426 22:54:53.168"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:52.337" endtime="20200426 22:54:53.168"></status>
+</kw>
+<kw name="Entao devo ver uma mensagem de alerta &quot;${mensagem_alerta}&quot;" library="actions">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>css:.alert-dismissible</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:54:53.169" endtime="20200426 22:54:53.208"></status>
+</kw>
+<kw name="Element Text Should Be" library="SeleniumLibrary">
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<arguments>
+<arg>css:.alert-dismissible</arg>
+<arg>${mensagem_alerta}</arg>
+</arguments>
+<msg timestamp="20200426 22:54:53.208" level="INFO">Verifying element 'css:.alert-dismissible' contains exact text 'Opps. Informe o seu email!'.</msg>
+<status status="PASS" starttime="20200426 22:54:53.208" endtime="20200426 22:54:53.235"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:53.168" endtime="20200426 22:54:53.236"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:45.851" endtime="20200426 22:54:53.236"></status>
+</kw>
+<kw name="Close session" library="BasePage" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200426 22:54:53.237" endtime="20200426 22:54:55.455"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:53.236" endtime="20200426 22:54:55.456"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:45.850" endtime="20200426 22:54:55.456" critical="yes"></status>
+</test>
+<test id="s1-s2-t5" name="Senha obrigatória">
+<kw name="Tentativa de login">
+<arguments>
+<arg>fernanda@ninjapixel.com</arg>
+<arg>${EMPTY}</arg>
+<arg>Opps. Informe a sua senha!</arg>
+</arguments>
+<kw name="Dado que eu acesso a página de login" library="actions">
+<kw name="Open session" library="BasePage">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>http://pixel-web:3000</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200426 22:54:55.465" level="INFO">Opening browser 'chrome' to base url 'http://pixel-web:3000'.</msg>
+<status status="PASS" starttime="20200426 22:54:55.465" endtime="20200426 22:55:01.772"></status>
+</kw>
+<kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:55:01.772" endtime="20200426 22:55:01.774"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:55.464" endtime="20200426 22:55:01.775"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:55.463" endtime="20200426 22:55:01.775"></status>
+</kw>
+<kw name="Quando eu submeto minhas credenciais &quot;${email}&quot; e &quot;${pass}&quot;" library="actions">
+<kw name="Login with" library="LoginPage">
+<arguments>
+<arg>${email}</arg>
+<arg>${pass}</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
+</arguments>
+<msg timestamp="20200426 22:55:01.776" level="INFO">Typing text 'fernanda@ninjapixel.com' into text field 'id:emailId'.</msg>
+<status status="PASS" starttime="20200426 22:55:01.776" endtime="20200426 22:55:02.615"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
+</arguments>
+<msg timestamp="20200426 22:55:02.616" level="INFO">Typing text '' into text field 'id:passId'.</msg>
+<status status="PASS" starttime="20200426 22:55:02.615" endtime="20200426 22:55:02.693"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>class:btn</arg>
+</arguments>
+<msg timestamp="20200426 22:55:02.694" level="INFO">Clicking element 'class:btn'.</msg>
+<status status="PASS" starttime="20200426 22:55:02.693" endtime="20200426 22:55:02.760"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:55:01.776" endtime="20200426 22:55:02.760"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:55:01.775" endtime="20200426 22:55:02.760"></status>
+</kw>
+<kw name="Entao devo ver uma mensagem de alerta &quot;${mensagem_alerta}&quot;" library="actions">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>css:.alert-dismissible</arg>
+</arguments>
+<status status="PASS" starttime="20200426 22:55:02.760" endtime="20200426 22:55:02.796"></status>
+</kw>
+<kw name="Element Text Should Be" library="SeleniumLibrary">
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<arguments>
+<arg>css:.alert-dismissible</arg>
+<arg>${mensagem_alerta}</arg>
+</arguments>
+<msg timestamp="20200426 22:55:02.797" level="INFO">Verifying element 'css:.alert-dismissible' contains exact text 'Opps. Informe a sua senha!'.</msg>
+<status status="PASS" starttime="20200426 22:55:02.796" endtime="20200426 22:55:02.825"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:55:02.760" endtime="20200426 22:55:02.825"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:55.462" endtime="20200426 22:55:02.825"></status>
+</kw>
+<kw name="Close session" library="BasePage" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200426 22:55:02.826" endtime="20200426 22:55:05.032"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:55:02.826" endtime="20200426 22:55:05.032"></status>
+</kw>
+<status status="PASS" starttime="20200426 22:54:55.461" endtime="20200426 22:55:05.033" critical="yes"></status>
 </test>
 <doc>Login
 Sendo um administrador de catálogo
 Quero me autenticar no sistema
 Para que eu possa gerenciar o catálogo de produtos</doc>
-<status status="PASS" starttime="20200421 20:52:58.637" endtime="20200421 20:53:24.851"></status>
+<status status="PASS" starttime="20200426 22:54:15.912" endtime="20200426 22:55:05.035"></status>
+</suite>
+<status status="PASS" starttime="20200426 22:54:02.500" endtime="20200426 22:55:05.042"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="2" fail="0">Critical Tests</stat>
-<stat pass="2" fail="0">All Tests</stat>
+<stat pass="6" fail="0">Critical Tests</stat>
+<stat pass="6" fail="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="2" fail="0" id="s1" name="Login">Login</stat>
+<stat pass="6" fail="0" id="s1" name="Cadastro &amp; Login">Cadastro &amp; Login</stat>
+<stat pass="1" fail="0" id="s1-s1" name="Cadastro">Cadastro &amp; Login.Cadastro</stat>
+<stat pass="5" fail="0" id="s1-s2" name="Login">Cadastro &amp; Login.Login</stat>
 </suite>
 </statistics>
 <errors>
