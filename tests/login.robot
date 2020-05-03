@@ -7,13 +7,18 @@ Documentation    Login
 Resource    ../resources/actions.robot
 Resource    ../resources/pages/BasePage.robot
 
-Test Teardown    Close session
+Suite Setup       Open Session
+Suite Teardown    Close session
+
+Test Teardown    After Test
 
 *** Test Cases ***
 Login com sucesso
     Dado que eu acesso a página de login
     Quando eu submeto minhas credenciais "fernanda@ninjapixel.com" e "pwd123"
     Entao devo ser autenticado
+
+    [Teardown]    After Test With Clear Local Storage
 
 Senha incorreta
     [Template]    Tentativa de login

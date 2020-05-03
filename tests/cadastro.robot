@@ -6,11 +6,19 @@ Documentation    Cadastro de produtos
 
 Resource    ../resources/actions.robot
 
-Test Setup       Open session
-Test Teardown    Close session
+Suite Setup       Login Session
+Suite Teardown    Close session
+
+Test Teardown    After Test
 
 *** Test Cases ***
 Disponibilizar produto
-    Dado que estou logado
-    Quando eu faço o cadastro desse produto     dk.json
-    Devo ver este item no catálogo
+    Dado que eu tenho um novo produto    dk.json
+    Quando eu faço o cadastro desse produto
+    Então devo ver este item no catálogo
+
+Produto duplicado
+    Dado que eu tenho um novo produto    master.json
+    Mas este produto já foi cadastrado
+    Quando eu faço o cadastro desse produto
+    Então devo ver a mensagem de alerta "Oops - Este produto já foi cadastrado!"

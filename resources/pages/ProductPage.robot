@@ -24,8 +24,11 @@ Select Category
     [Arguments]    ${cat}
 
     Click Element                    css:input[placeholder=Gategoria]
+    
+    Set Selenium Speed    1
     Wait Until Element Is Visible    class:el-select-dropdown__list
     Click Element                    xpath://li/span[text()='${cat}']
+    Set Selenium Speed    0
 
 Input Producers
     [Arguments]    ${producers}
