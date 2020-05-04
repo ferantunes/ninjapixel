@@ -12,15 +12,6 @@ Resource    pages/ProductPage.robot
 
 
 *** Keywords ***
-### Helpers
-Get Product Json
-    [Arguments]    ${file_name}
-
-    ${file}=    Get File    resources/fixtures/${file_name}
-    ${json}=    Evaluate    json.loads($file)                  json
-
-    [Return]    ${json}
-
 ### Login
 Dado que eu acesso a página de login
     Go To    ${BASE_URL}/login
@@ -55,7 +46,7 @@ Então devo ver este item no catálogo
     Table Should Contain    class:table    ${product_json['name']}
 
 Então devo ver a mensagem de alerta "${expect_message}"
-    Wait Until Element Contains    class:alert-danger    ${expect_message}
+    Wait Until Element Contains    css:div .col-sm-12    ${expect_message}
 
 ### Remover
 Dado que eu tenho o produto "${file_name}" no catálogo
@@ -67,7 +58,7 @@ Dado que eu tenho o produto "${file_name}" no catálogo
     Set Test Variable    ${product_json}
 
 Quando solicito a exclusão
-    Click Element    xpath://tr[td//text()[contains(., '${product_json['name']}')]]//button
+    Click Element                    xpath://tr[td//text()[contains(., '${product_json['name']}')]]//button
     Wait Until Element Is Visible    class:swal2-modal
 
 E confirmo a solicitação
