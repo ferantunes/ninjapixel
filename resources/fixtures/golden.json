@@ -1,0 +1,8 @@
+{
+    "name": "Golden Axe",
+    "cat": null,
+    "price": "9.99",
+    "desc": "Descrição do jogo Golden Axe!!",
+    "producers": ["Sega"],
+    "image": "golden-axe.jpg"
+}
