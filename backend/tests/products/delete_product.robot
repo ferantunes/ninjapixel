@@ -7,4 +7,11 @@ Resource    ../../resources/services.robot
 Delete Product
     [tags]    success
 
-    #Desafio: Automatizar o Delete
+    ${token}=      Get Auth Token    ${USER_AUTH}    ${PASSWORD_AUTH}
+    ${payload}=    Get Json          delete.json
+    ${product}=    Post Product      ${payload}      ${token}
+
+    ${id}=      Convert To String    ${product.json()['id']}
+    ${resp}=    Delete Product       ${id}                      ${token}
+
+    Status Should Be    204    ${resp}

@@ -2,6 +2,11 @@
 Documentation    Pixel Api POST /products
 
 Resource    ../../resources/services.robot
+Resource    ../../resources/db.robot
+
+Suite Setup       Connect DB
+Suite Teardown    Disconnect From Database
+Test Setup        Clear Product Table
 
 ***Test Cases***
 Create new product
@@ -17,13 +22,16 @@ Create new product
 Duplicated Product
     [tags]    conflict
 
-    # Desafio implementar o cenário de duplicado com uma nova massa sem depender do
-    # cenário antetior
-
     ${token}=    Get Auth Token    ${USER_AUTH}    ${PASSWORD_AUTH}
-    # ${resp}=        Post Product      dk.json     ${token}
 
-    # Status Should Be    409    ${resp}
+    ${payload}=         Get Json        duplicated.json
+    ${resp_created}=    Post Product    ${payload}         ${token}
+
+    Status Should Be    200    ${resp_created}    
+
+    ${resp}=    Post Product    ${payload}    ${token}
+
+    Status Should Be    409    ${resp}
 
 Required title
     [tags]    bad_request

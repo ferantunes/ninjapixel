@@ -7,9 +7,9 @@ Resource    ../../resources/services.robot
 Get Unique Product
     [tags]    success
 
-    ${token}=      Get Auth Token    ${USER_AUTH}    ${PASSWORD_AUTH}
+    ${token}=      Get Auth Token    ${USER_AUTH}       ${PASSWORD_AUTH}
     ${payload}=    Get Json          get_unique.json
-    ${product}=    Post Product      ${payload}               ${token}
+    ${product}=    Post Product      ${payload}         ${token}
 
     ${id}=      Convert To String    ${product.json()['id']}
     ${resp}=    Get Product          ${id}                      ${token}
@@ -25,6 +25,4 @@ Product Not found
 
     ${resp}=    Get Product    9999    ${token}
 
-    # Status Should Be    404    ${resp}
-    #  "msg": "res.sendstatus is not a function"
-    Status Should Be    412    ${resp}
+    Status Should Be    404    ${resp}

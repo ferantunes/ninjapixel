@@ -6,6 +6,7 @@ Resource   credentials.robot
 Library    RequestsLibrary
 Library    Collections
 Library    OperatingSystem
+Library    DatabaseLibrary
 
 Library    libs/db.py
 
@@ -43,7 +44,7 @@ Post Token
 Post Product
     [Arguments]    ${payload}    ${token}
 
-    Remove Product By Title    ${payload['title']}
+    # Remove Product By Title    ${payload['title']}
 
     &{headers}=    Create Dictionary    Content-Type=application/json    Authorization=JWT ${token}
 
@@ -59,5 +60,16 @@ Get Product
     &{headers}=    Create Dictionary    Content-Type=application/json    Authorization=JWT ${token}
 
     ${resp}    Get Request    pixel    /products/${id}    headers=${headers}
+
+    [return]    ${resp}
+
+Delete Product
+    [Arguments]    ${id}    ${token}
+
+    Create Session    pixel    http://pixel-api:3333
+
+    &{headers}=    Create Dictionary    Content-Type=application/json    Authorization=JWT ${token}
+
+    ${resp}    Delete Request    pixel    /products/${id}    headers=${headers}
 
     [return]    ${resp}
