@@ -1,0 +1,8 @@
+{
+    "title": "Mario Kart",
+    "category": "Console",
+    "producers": ["Nintendo", "Namco"], 
+    "price": "199.90", 
+    "description": "Mario Kart é uma série de jogos de corrida desenvolvida e publicada pela Nintendo como spin-off da franquia Mario.",
+    "cover": "mario-kart.jpg"
+}
