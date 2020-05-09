@@ -44,8 +44,6 @@ Post Token
 Post Product
     [Arguments]    ${payload}    ${token}
 
-    # Remove Product By Title    ${payload['title']}
-
     &{headers}=    Create Dictionary    Content-Type=application/json    Authorization=JWT ${token}
 
     ${resp}=    Post Request    pixel    /products    data=${payload}    headers=${headers}
